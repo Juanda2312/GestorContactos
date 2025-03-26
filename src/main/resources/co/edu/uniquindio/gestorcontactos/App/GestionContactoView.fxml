@@ -7,12 +7,14 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 
 <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="501.0" prefWidth="925.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.gestorcontactos.Controller.GestionContactoController">
    <children>
@@ -49,17 +51,45 @@
                   <TextField fx:id="txtcorreo" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <TextField fx:id="txtdia" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <TextField fx:id="txtmes" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <Button fx:id="btnsubirArchvio" mnemonicParsing="false" onAction="#SubirArchivoAction" prefHeight="30.0" prefWidth="116.0" text="Subir Imagen" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Button fx:id="btnsubirArchvio" mnemonicParsing="false" onAction="#SubirArchivoAction" prefHeight="30.0" prefWidth="116.0" style="-fx-background-color: #c3fd89;" text="Subir Imagen" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                     <effect>
+                        <InnerShadow>
+                           <color>
+                              <Color opacity="0.5687022805213928" />
+                           </color>
+                        </InnerShadow>
+                     </effect></Button>
                </children>
             </GridPane>
             <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="72.0" prefWidth="355.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Button fx:id="btnanadir" mnemonicParsing="false" onAction="#AnadirContactoAction" prefHeight="30.0" prefWidth="117.0" text="Añadir Contacto" />
-                  <Button fx:id="btneditar" alignment="CENTER" mnemonicParsing="false" onAction="#EditarContactoAction" prefHeight="30.0" prefWidth="124.0" text="Editar Contacto" />
-                  <Button fx:id="btneliminar" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#EliminarContactoAction" prefHeight="30.0" prefWidth="115.0" text="Eliminar Contacto">
+                  <Button fx:id="btnanadir" mnemonicParsing="false" onAction="#AnadirContactoAction" prefHeight="30.0" prefWidth="117.0" style="-fx-background-color: #c3fd89;" text="Añadir Contacto">
+                     <effect>
+                        <InnerShadow>
+                           <color>
+                              <Color opacity="0.5381679534912109" />
+                           </color>
+                        </InnerShadow>
+                     </effect></Button>
+                  <Button fx:id="btneditar" alignment="CENTER" mnemonicParsing="false" onAction="#EditarContactoAction" prefHeight="30.0" prefWidth="124.0" style="-fx-background-color: #fdfd89;" text="Editar Contacto">
+                     <effect>
+                        <InnerShadow>
+                           <color>
+                              <Color opacity="0.6183205842971802" />
+                           </color>
+                        </InnerShadow>
+                     </effect></Button>
+                  <Button fx:id="btneliminar" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#EliminarContactoAction" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #fd8a8a;" text="Eliminar Contacto">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
+                     <effect>
+                        <InnerShadow>
+                           <color>
+                              <Color opacity="0.5" />
+                           </color>
+                        </InnerShadow>
+                     </effect>
                   </Button>
                </children>
             </HBox>
@@ -82,7 +112,14 @@
                         <Label text="Filtrar por:" />
                         <ComboBox fx:id="comboFiltros" prefHeight="25.0" prefWidth="232.0" GridPane.columnIndex="1" />
                         <TextField fx:id="txtfiltro" maxWidth="-Infinity" prefHeight="26.0" prefWidth="219.0" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" />
-                        <Button fx:id="btnbuscar" mnemonicParsing="false" onAction="#BuscarContactoAction" prefHeight="30.0" prefWidth="134.0" text="Buscar" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Button fx:id="btnbuscar" mnemonicParsing="false" onAction="#BuscarContactoAction" prefHeight="30.0" prefWidth="134.0" style="-fx-background-color: #c3fd89;" text="Buscar" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <effect>
+                              <InnerShadow>
+                                 <color>
+                                    <Color opacity="0.5190839767456055" />
+                                 </color>
+                              </InnerShadow>
+                           </effect></Button>
                      </children>
                   </GridPane>
                </children>
@@ -96,7 +133,14 @@
                   <TableColumn fx:id="columnfechanacimiento" prefWidth="121.0" text="Dia de cumpleaños" />
               </columns>
             </TableView>
-            <Button fx:id="btnrefrescar" alignment="CENTER" mnemonicParsing="false" onAction="#RefrescarTablaAction" prefHeight="25.0" prefWidth="132.0" text="Refrescar" />
+            <Button fx:id="btnrefrescar" alignment="CENTER" mnemonicParsing="false" onAction="#RefrescarTablaAction" prefHeight="25.0" prefWidth="132.0" style="-fx-background-color: #fdfd89;" text="Refrescar">
+               <effect>
+                  <InnerShadow>
+                     <color>
+                        <Color opacity="0.4541984796524048" />
+                     </color>
+                  </InnerShadow>
+               </effect></Button>
          </children>
       </VBox>
    </children>

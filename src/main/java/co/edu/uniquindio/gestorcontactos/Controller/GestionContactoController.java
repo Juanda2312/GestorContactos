@@ -6,10 +6,7 @@ package co.edu.uniquindio.gestorcontactos.Controller;
 
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import co.edu.uniquindio.gestorcontactos.Model.Contacto;
 import co.edu.uniquindio.gestorcontactos.Model.GestionContacto;
@@ -189,6 +186,7 @@ public class GestionContactoController implements Initializable {
 }
     @FXML
     void EliminarContactoAction(ActionEvent event) {
+
         if (contactoseleccionado != null) {
             try {
                 gestionContacto.EliminarContacto(contactoseleccionado);
@@ -215,8 +213,8 @@ public class GestionContactoController implements Initializable {
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
             try {
-                Image image = new Image(selectedFile.toURI().toString()); // Convertir el archivo a una imagen
-                imgFotoperfil.setImage(image); // Establecer la imagen en el ImageView
+                Image image = new Image(selectedFile.toURI().toString());
+                imgFotoperfil.setImage(image);
                 mostrarAlerta("Imagen cargada correctamente", Alert.AlertType.INFORMATION);
             } catch (Exception e) {
                 mostrarAlerta("Error al cargar la imagen", Alert.AlertType.ERROR);
@@ -282,7 +280,6 @@ public class GestionContactoController implements Initializable {
         alert.setContentText(mensaje);
         alert.show();
     }
-
 
     private void cargarContactos() {
         contactostabla.setAll(gestionContacto.ListarContactos());
