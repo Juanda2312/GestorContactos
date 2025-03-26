@@ -3,8 +3,6 @@ package co.edu.uniquindio.gestorcontactos.Model;
 import javafx.scene.image.Image;
 import lombok.*;
 
-import java.time.LocalDate;
-
 @AllArgsConstructor
 @Setter
 @Getter
