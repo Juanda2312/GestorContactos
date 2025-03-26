@@ -8,7 +8,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import co.edu.uniquindio.gestorcontactos.Model.Contacto;
@@ -34,8 +34,8 @@ public class GestionContactoController implements Initializable {
 
     private final GestionContacto gestionContacto;
     private Contacto contactoseleccionado;
-    private String filtro;
     private ObservableList<Contacto> contactostabla;
+    Image Idefault;
 
     @FXML // ResourceBundle that was given to the FXMLLoader
     private ResourceBundle resources;
@@ -108,28 +108,28 @@ public class GestionContactoController implements Initializable {
 
     @FXML
     void AnadirContactoAction(ActionEvent event) {
-        try{
-            gestionContacto.CrearContacto(
-                    txtnombre.getText(),
-                    txtapellido.getText(),
-                    txttelefono.getText(),
-                    txtcorreo.getText(),
-                    Integer.parseInt(txtdia.getText()),
-                    Integer.parseInt(txtmes.getText()),
-                    imgFotoperfil.getImage()
-            );
-            LimpiarDatos();
-            actualizarContactos();
-            mostrarAlerta("El contacto ha sido añadido correctamente", Alert.AlertType.INFORMATION);
-        }catch (NumberFormatException e) {
-            if (!(txtdia.getText().isEmpty() || txtmes.getText().isEmpty())){
-                mostrarAlerta("Ingrese un dia o mes valido", Alert.AlertType.ERROR);
-            }else{
-                mostrarAlerta("Rellene todos los datos", Alert.AlertType.ERROR);
+        if (imgFotoperfil.getImage().toString().equals(Idefault.toString())) {
+            mostrarAlerta("Seleccione una foto de perfil",Alert.AlertType.ERROR);
+        }else {
+            try{
+                gestionContacto.CrearContacto(
+                        txtnombre.getText(),
+                        txtapellido.getText(),
+                        txttelefono.getText(),
+                        txtcorreo.getText(),
+                        txtdia.getText(),
+                        txtmes.getText(),
+                        imgFotoperfil.getImage()
+                );
+                LimpiarDatos();
+                actualizarContactos();
+                Imagenpordefecto();
+                mostrarAlerta("El contacto ha sido añadido correctamente", Alert.AlertType.INFORMATION);
+            }catch (Exception e){
+                mostrarAlerta(e.getMessage(),Alert.AlertType.ERROR);
             }
-        }catch (Exception e){
-            mostrarAlerta(e.getMessage(),Alert.AlertType.ERROR);
         }
+
     }
 
     @FXML
@@ -151,7 +151,6 @@ public class GestionContactoController implements Initializable {
                     mostrarAlerta(e.getMessage(), Alert.AlertType.ERROR);
                 }
                 break;
-
             default:
                 mostrarAlerta("Seleccione un filtro de la caja de filtros", Alert.AlertType.INFORMATION);
         }
@@ -161,28 +160,28 @@ public class GestionContactoController implements Initializable {
     @FXML
     void EditarContactoAction(ActionEvent event) {
         if(contactoseleccionado != null){
-            try{
-                gestionContacto.ActualizarContacto(
-                        contactoseleccionado,
-                        txtnombre.getText(),
-                        txtapellido.getText(),
-                        txttelefono.getText(),
-                        txtcorreo.getText(),
-                        Integer.parseInt(txtdia.getText()),
-                        Integer.parseInt(txtmes.getText()),
-                        imgFotoperfil.getImage()
-                        );
-                LimpiarDatos();
-                actualizarContactos();
-                mostrarAlerta("El contacto ha sido actualizado correctamente", Alert.AlertType.INFORMATION);
-            } catch (NumberFormatException e) {
-                if (!(txtdia.getText().isEmpty() || txtmes.getText().isEmpty())){
-                    mostrarAlerta("Ingrese un dia o mes valido", Alert.AlertType.ERROR);
-                }else{
-                    mostrarAlerta("Rellene todos los datos", Alert.AlertType.ERROR);
+            if (imgFotoperfil.getImage().toString().equals(Idefault.toString())) {
+                mostrarAlerta("Seleccione una foto de perfil",Alert.AlertType.ERROR);
+            }else{
+                try{
+                    gestionContacto.ActualizarContacto(
+                            contactoseleccionado,
+                            txtnombre.getText(),
+                            txtapellido.getText(),
+                            txttelefono.getText(),
+                            txtcorreo.getText(),
+                            txtdia.getText(),
+                            txtmes.getText(),
+                            imgFotoperfil.getImage()
+                    );
+                    LimpiarDatos();
+                    actualizarContactos();
+                    Imagenpordefecto();
+                    mostrarAlerta("El contacto ha sido actualizado correctamente", Alert.AlertType.INFORMATION);
                 }
-            }catch (Exception e){
-                mostrarAlerta(e.getMessage(),Alert.AlertType.ERROR);
+                catch (Exception e){
+                    mostrarAlerta(e.getMessage(),Alert.AlertType.ERROR);
+                }
             }
         }else {
             mostrarAlerta("Seleccione un contacto de la tabla", Alert.AlertType.INFORMATION);
@@ -195,6 +194,7 @@ public class GestionContactoController implements Initializable {
                 gestionContacto.EliminarContacto(contactoseleccionado);
                 LimpiarDatos();
                 actualizarContactos();
+                Imagenpordefecto();
                 mostrarAlerta("Contacto eliminado correctamente", Alert.AlertType.INFORMATION);
             }catch (Exception e) {
                 mostrarAlerta(e.getMessage(),Alert.AlertType.ERROR);
@@ -208,7 +208,7 @@ public class GestionContactoController implements Initializable {
     @FXML
     void SubirArchivoAction(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Imagenes", "*.png"));
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Imagen", "*.png"), new FileChooser.ExtensionFilter("Imagen", "*.jpg"));
         fileChooser.setTitle("Elige la foto de perfil");
         fileChooser.setInitialDirectory(new File("C:/"));
 
@@ -230,9 +230,11 @@ public class GestionContactoController implements Initializable {
     void RefrescarTablaAction(ActionEvent event) {
         LimpiarDatos();
         actualizarContactos();
+        Imagenpordefecto();
     }
 
     public GestionContactoController() {
+        Idefault = new Image((getClass().getResourceAsStream("/default.png")));
         gestionContacto = new GestionContacto();
     }
 
@@ -253,6 +255,7 @@ public class GestionContactoController implements Initializable {
         //Inicializar lista observable y cargar las notas
         contactostabla = FXCollections.observableArrayList();
         cargarContactos();
+        Imagenpordefecto();
 
         //Evento click en la tabla
         tableContactos.setOnMouseClicked(e -> {
@@ -302,4 +305,6 @@ public class GestionContactoController implements Initializable {
     public void actualizarContactos() {
         contactostabla.setAll(gestionContacto.ListarContactos());
     }
+    public void Imagenpordefecto(){imgFotoperfil.setImage(Idefault);}
 }
+

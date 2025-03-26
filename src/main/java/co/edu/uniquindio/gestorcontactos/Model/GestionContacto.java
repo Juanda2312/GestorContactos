@@ -13,16 +13,27 @@ public class GestionContacto {
         contactos = new ArrayList<>();
     }
 
-    public void CrearContacto(String nombre, String apellido, String telefono, String email, int dianacimiento, int mesnacimiento, Image fotoperfil)throws Exception {
-        if(nombre.isEmpty() || apellido.isEmpty() || telefono.isEmpty() || email.isEmpty()|| dianacimiento==0||mesnacimiento==0)throw new Exception("Rellene todos los datos");
-        if(fotoperfil==null)throw new Exception("Seleccione una foto de perfil");
+    public void CrearContacto(String nombre, String apellido, String telefono, String email, String dianacimiento, String mesnacimiento, Image fotoperfil)throws Exception {
+        if(nombre.isEmpty() || apellido.isEmpty() || telefono.isEmpty() || email.isEmpty()|| dianacimiento.isEmpty()||mesnacimiento.isEmpty())throw new Exception("Rellene todos los datos");
         String e = "";
         if(!Pattern.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$", nombre))e = e + "Nombre invalido - ";
         if(!Pattern.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$", apellido)) e = e + "Apellido invalido - ";
         if(!Pattern.matches("^\\d{10}$",telefono))e = e + "Telefono invalido - ";
         if(!Pattern.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",email))e = e + "Correo invalido - ";
-        if(!(dianacimiento>0 && dianacimiento<=31 ))e = e + "Dia de nacimiento invalido - ";
-        if(!(mesnacimiento>0 && mesnacimiento<=12)) e = e + "Mes de nacimiento invalido - ";
+        int diai;
+        int mesi;
+        try{
+            diai = Integer.parseInt(dianacimiento);
+        } catch (Exception ex) {
+            diai = 0;
+        }
+        try {
+            mesi = Integer.parseInt(mesnacimiento);
+        }catch (Exception ex) {
+            mesi = 0;
+        }
+        if(!(diai>0 && diai<=31 ))e = e + "Dia de nacimiento invalido - ";
+        if(!(mesi>0 && mesi<=12)) e = e + "Mes de nacimiento invalido - ";
         if (!e.isEmpty()) throw new Exception(e + "Verifique y corriga los campos.");
 
         try {
@@ -30,7 +41,7 @@ public class GestionContacto {
             throw new Exception("Ya existe un contacto con este número de telefono");
         } catch (Exception ex) {
             if (!ex.getMessage().equals("No se encontro un contacto con ese telefono")) throw ex;
-            Contacto contacto = new Contacto(nombre, apellido, telefono, email, dianacimiento, mesnacimiento, fotoperfil);
+            Contacto contacto = new Contacto(nombre, apellido, telefono, email, diai, mesi, fotoperfil);
             contactos.add(contacto);
         }
     }
@@ -38,7 +49,7 @@ public class GestionContacto {
     public ArrayList<Contacto> buscarContactoNombre(String nombre)throws Exception {
         if (nombre.isEmpty()) throw new Exception("Ingrese un nombre para buscar el contacto");
         if(!Pattern.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$", nombre)) throw new Exception("Nombre invalido");
-        ArrayList<Contacto> contactosnombre = new ArrayList();
+        ArrayList<Contacto> contactosnombre = new ArrayList<>();
         for (Contacto contacto: contactos) {
             if (contacto.getNombre().equalsIgnoreCase(nombre)) {
                 contactosnombre.add(contacto);
@@ -59,7 +70,7 @@ public class GestionContacto {
         }
 
 
-    public void ActualizarContacto(Contacto contacto,String nombre, String apellido, String telefono, String email, int dianacimiento, int mesnacimiento, Image fotoperfil)throws Exception {
+    public void ActualizarContacto(Contacto contacto,String nombre, String apellido, String telefono, String email, String dianacimiento, String mesnacimiento, Image fotoperfil)throws Exception {
         if (contacto == null)throw new Exception("Seleccione un contacto de la lista");
         if (contacto.getTelefono().equals(telefono)) {
             contactos.remove(contacto);

@@ -14,9 +14,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="501.0" prefWidth="925.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.gestorcontactos.Controller.GestionContactoController">
+<HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="501.0" prefWidth="925.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.gestorcontactos.Controller.GestionContactoController">
    <children>
-      <VBox prefHeight="514.0" prefWidth="385.0">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="514.0" prefWidth="385.0" HBox.hgrow="ALWAYS">
          <children>
             <GridPane prefHeight="428.0" prefWidth="355.0">
               <columnConstraints>
@@ -52,7 +52,7 @@
                   <Button fx:id="btnsubirArchvio" mnemonicParsing="false" onAction="#SubirArchivoAction" prefHeight="30.0" prefWidth="116.0" text="Subir Imagen" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                </children>
             </GridPane>
-            <HBox prefHeight="72.0" prefWidth="355.0">
+            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="72.0" prefWidth="355.0" VBox.vgrow="ALWAYS">
                <children>
                   <Button fx:id="btnanadir" mnemonicParsing="false" onAction="#AnadirContactoAction" prefHeight="30.0" prefWidth="117.0" text="Añadir Contacto" />
                   <Button fx:id="btneditar" alignment="CENTER" mnemonicParsing="false" onAction="#EditarContactoAction" prefHeight="30.0" prefWidth="124.0" text="Editar Contacto" />
@@ -65,11 +65,11 @@
             </HBox>
          </children>
       </VBox>
-      <VBox prefHeight="514.0" prefWidth="599.0">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="514.0" prefWidth="599.0" HBox.hgrow="ALWAYS">
          <children>
-            <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="95.0" prefWidth="315.0">
+            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" nodeOrientation="RIGHT_TO_LEFT" prefHeight="95.0" prefWidth="315.0" VBox.vgrow="ALWAYS">
                <children>
-                  <GridPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="94.0" prefWidth="519.0">
+                  <GridPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="101.0" prefWidth="571.0" HBox.hgrow="ALWAYS">
                     <columnConstraints>
                       <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -81,22 +81,22 @@
                      <children>
                         <Label text="Filtrar por:" />
                         <ComboBox fx:id="comboFiltros" prefHeight="25.0" prefWidth="232.0" GridPane.columnIndex="1" />
-                        <TextField fx:id="txtfiltro" maxWidth="-Infinity" prefHeight="26.0" prefWidth="138.0" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" />
+                        <TextField fx:id="txtfiltro" maxWidth="-Infinity" prefHeight="26.0" prefWidth="219.0" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" />
                         <Button fx:id="btnbuscar" mnemonicParsing="false" onAction="#BuscarContactoAction" prefHeight="30.0" prefWidth="134.0" text="Buscar" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </children>
             </HBox>
-            <TableView fx:id="tableContactos" prefHeight="370.0" prefWidth="494.0">
+            <TableView fx:id="tableContactos" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="370.0" prefWidth="494.0" VBox.vgrow="ALWAYS">
               <columns>
                 <TableColumn fx:id="columnnombre" prefWidth="95.0" text="Nombre" />
                 <TableColumn fx:id="columnapellido" prefWidth="85.0" text="Apellido" />
                   <TableColumn fx:id="columntelefono" prefWidth="119.0" text="Telefono" />
                   <TableColumn fx:id="columncorreo" prefWidth="149.0" text="Correo" />
-                  <TableColumn fx:id="columnfechanacimiento" prefWidth="121.0" text="Fecha nacimiento" />
+                  <TableColumn fx:id="columnfechanacimiento" prefWidth="121.0" text="Dia de cumpleaños" />
               </columns>
             </TableView>
-            <Button fx:id="btnrefrescar" alignment="CENTER" mnemonicParsing="false" onAction="#RefrescarTablaAction" prefHeight="25.0" prefWidth="132.0" text="Refrescar Tabla" />
+            <Button fx:id="btnrefrescar" alignment="CENTER" mnemonicParsing="false" onAction="#RefrescarTablaAction" prefHeight="25.0" prefWidth="132.0" text="Refrescar" />
          </children>
       </VBox>
    </children>
