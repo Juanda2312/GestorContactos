@@ -141,10 +141,16 @@ public class GestionContactoController implements Initializable {
                 }
                 break;
             case "Telefono":
-                try {
-                    contactostabla.setAll(gestionContacto.buscarContactoTelefono(txtfiltro.getText()));
-                    tableContactos.setItems(contactostabla);
-                } catch (Exception e) {
+                try{
+                    Contacto contactoencontrado = gestionContacto.buscarContactoTelefono(txtfiltro.getText());
+                    if (contactoencontrado != null) {
+                        contactostabla.setAll(contactoencontrado);
+                        tableContactos.setItems(contactostabla);
+                    }else{
+                        contactostabla.setAll(new ArrayList<>());
+                        tableContactos.setItems(contactostabla);
+                    }
+                }catch (Exception e){
                     mostrarAlerta(e.getMessage(), Alert.AlertType.ERROR);
                 }
                 break;
@@ -233,7 +239,7 @@ public class GestionContactoController implements Initializable {
 
     public GestionContactoController() {
         Idefault = new Image((getClass().getResourceAsStream("/default.png")));
-        gestionContacto = new GestionContacto();
+        gestionContacto = GestionContacto.getInstancia();
     }
 
     @Override
